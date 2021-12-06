@@ -1,4 +1,5 @@
-import React from "react";
+import React, {  useState } from "react";
+import{ auth } from './fireBase'
 import {
   KeyboardAvoidingView,
   StyleSheet,
@@ -6,26 +7,44 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  
 } from "react-native";
+
+
+
 
 //Keeps keyboard from covering input fields
 const LoginScreen = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState(''); 
     //Holds user input 
     //The array in line 39 allows us to inherit all the styles frm button and button outline
+
+    const handleSignUp = () => {
+        auth
+        .createUserWithEmailAndPassword(email, password)
+        .then(userCredentials => {
+            const user = userCredentials.user;
+            console.log(user.email);
+        })
+        .catch(error => alert(error.message))
+    }
+
+
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
-          // value={ }
-          // onChangeText={text => }
+          value={ email}
+          onChangeText={text => setEmail(text)}
           style={styles.input}
         />
 
         <TextInput
           placeholder="Password"
-          //  value={ }
-          // onChangeText={text => }
+           value={ password}
+          onChangeText={text => setPassword(text)}
           style={styles.input}
           secureTextEntry
         />
@@ -35,7 +54,7 @@ const LoginScreen = () => {
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={handleSignUp}
           style={[styles.button, styles.buttonOutline]}
         >
           <Text style={styles.buttonOutlineText}>Register</Text>
