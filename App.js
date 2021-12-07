@@ -5,13 +5,23 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
-
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
 
-  const [isLoggedin, setIsLoggedIn] = useState(true);
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user != null) {
+      console.log("We are authenticated now!")
+    } 
+
+    
+  });
+  
+
+  const [isLoggedin, setIsLoggedIn] = useState(false);
 
 
   return (
