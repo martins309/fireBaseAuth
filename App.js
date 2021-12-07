@@ -11,7 +11,7 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
 
-  const [isLoggedin, setIsLoggedIn] = useState(false);
+  const [isLoggedin, setIsLoggedIn] = useState(true);
 
 
   return (
