@@ -7,18 +7,20 @@ import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
 
   const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, (user) => {
     if (user != null) {
       console.log("We are authenticated now!")
     } 
 
-    
+
   });
+
   
 
   const [isLoggedin, setIsLoggedIn] = useState(false);
